@@ -1,0 +1,438 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body { 
+    font-family: 'Comic Sans MS', 'Chalkboard SE', cursive; 
+    background: linear-gradient(135deg, #6a89cc 0%, #4a69bd 100%);
+    min-height: 90vh;
+    padding: 20px;
+}
+
+.container { 
+    max-width: 1200px;
+    margin: 0 auto; 
+    background: rgba(255, 255, 255, 0.95);
+    padding: 30px;
+    border-radius: 20px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+    text-align: center;
+    border: 8px solid #fad390;
+}
+
+.header { 
+    margin-bottom: 30px;
+    background: #f8c291;
+    padding: 20px;
+    border-radius: 15px;
+    border: 5px solid #e55039;
+}
+
+h1 {
+    color: #2c3e50;
+    font-size: 2.8em;
+    margin-bottom: 10px;
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.1);
+}
+
+.subtitle {
+    color: #34495e;
+    font-size: 1.3em;
+    margin-bottom: 20px;
+    font-weight: bold;
+}
+
+.status-card {
+    background: #dff9fb;
+    border: 5px solid #7ed6df;
+    border-radius: 15px;
+    padding: 20px;
+    margin: 20px 0;
+    position: relative;
+}
+
+.status-card::before {
+    content: "🌟";
+    position: absolute;
+    top: -15px;
+    left: 20px;
+    font-size: 1.5em;
+    background: white;
+    padding: 5px;
+    border-radius: 50%;
+    border: 3px solid #7ed6df;
+}
+
+.current-action {
+    background: #fff9c4;
+    border: 5px dashed #f6b93b;
+    border-radius: 15px;
+    padding: 30px;
+    margin: 20px 0;
+    animation: pulse 2s infinite;
+    display: none;
+    position: relative;
+}
+
+.current-action::before {
+    content: "🎯";
+    position: absolute;
+    top: -15px;
+    left: 20px;
+    font-size: 1.5em;
+    background: white;
+    padding: 5px;
+    border-radius: 50%;
+    border: 3px solid #f6b93b;
+}
+
+.action-emoji-large {
+    font-size: 5em;
+    margin-bottom: 15px;
+    animation: bounce 1s infinite alternate;
+}
+
+.action-emoji-medium {
+    font-size: 2.5em;
+    margin-bottom: 10px;
+}
+
+.action-instruction {
+    font-size: 1.8em;
+    color: #2c3e50;
+    margin-bottom: 15px;
+    font-weight: bold;
+    background: #ffeaa7;
+    padding: 10px;
+    border-radius: 10px;
+    display: inline-block;
+}
+
+.action-name {
+    font-size: 1.4em;
+    color: #666;
+    background: #f7f1e3;
+    padding: 8px 15px;
+    border-radius: 20px;
+    display: inline-block;
+}
+
+.action-title {
+    font-size: 1.1em;
+    font-weight: bold;
+    margin-bottom: 8px;
+    color: #2c3e50;
+}
+
+.action-status {
+    font-size: 0.9em;
+    color: #666;
+    font-weight: bold;
+}
+
+.progress-container {
+    background: #f0f0f0;
+    border-radius: 10px;
+    height: 30px;
+    margin: 20px 0;
+    overflow: hidden;
+    border: 3px solid #ddd;
+}
+
+.progress-bar {
+    height: 100%;
+    background: linear-gradient(90deg, #78e08f, #38ada9);
+    width: 0%;
+    transition: width 0.5s ease;
+    border-radius: 10px;
+    position: relative;
+}
+
+.progress-bar::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    background-image: linear-gradient(-45deg, rgba(255,255,255,0.2) 25%, transparent 25%, transparent 50%, rgba(255,255,255,0.2) 50%, rgba(255,255,255,0.2) 75%, transparent 75%, transparent);
+    background-size: 20px 20px;
+    animation: move 1s linear infinite;
+}
+
+.actions-grid {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 15px;
+    margin: 20px 0;
+}
+
+.action-grid-item {
+    background: white;
+    border: 5px solid #ddd;
+    border-radius: 15px;
+    padding: 20px 15px;
+    transition: all 0.3s ease;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    min-height: 160px;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+}
+
+.action-grid-item.completed {
+    border-color: #78e08f;
+    background: #e8f8f5;
+    transform: scale(1.02);
+    box-shadow: 0 6px 12px rgba(120, 224, 143, 0.3);
+}
+
+.action-grid-item.current {
+    border-color: #f6b93b;
+    background: #fff9e7;
+    transform: scale(1.05);
+    box-shadow: 0 8px 16px rgba(246, 185, 59, 0.4);
+    animation: glow 2s infinite alternate;
+}
+
+.action-grid-item.upcoming {
+    border-color: #e0e0e0;
+    background: #f9f9f9;
+    opacity: 0.8;
+}
+
+.grid-item-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+.sequence-number {
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    background: #95afc0;
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+    font-size: 1em;
+    border: 2px solid white;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+}
+
+.action-grid-item.completed .sequence-number {
+    background: #78e08f;
+}
+
+.action-grid-item.current .sequence-number {
+    background: #f6b93b;
+    animation: pulse 1.5s infinite;
+}
+
+.action-grid-item.upcoming .sequence-number {
+    background: #95afc0;
+}
+
+.grid-item-content {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.completion-screen {
+    background: #e8f8f5;
+    border: 5px solid #78e08f;
+    border-radius: 20px;
+    padding: 40px;
+    margin: 20px 0;
+    display: none;
+    position: relative;
+    overflow: hidden;
+}
+
+.completion-screen::before {
+    content: "🏆";
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    font-size: 3em;
+    opacity: 0.2;
+}
+
+.celebration-emoji {
+    font-size: 4em;
+    margin-bottom: 20px;
+    animation: bounce 1s infinite;
+}
+
+.play-again-btn {
+    margin-top: 20px; 
+    padding: 15px 30px; 
+    font-size: 1.3em; 
+    border-radius: 50px; 
+    background: #f6b93b; 
+    color: white; 
+    border: none; 
+    cursor: pointer;
+    font-family: inherit;
+    transition: all 0.3s ease;
+    font-weight: bold;
+    box-shadow: 0 4px 8px rgba(246, 185, 59, 0.4);
+}
+
+.play-again-btn:hover {
+    background: #e55039;
+    transform: scale(1.05);
+    box-shadow: 0 6px 12px rgba(229, 80, 57, 0.4);
+}
+
+@keyframes pulse {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.05); }
+    100% { transform: scale(1); }
+}
+
+@keyframes bounce {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-10px); }
+}
+
+@keyframes glow {
+    0% { box-shadow: 0 0 10px rgba(246, 185, 59, 0.4); }
+    100% { box-shadow: 0 0 20px rgba(246, 185, 59, 0.8); }
+}
+
+@keyframes move {
+    0% { background-position: 0 0; }
+    100% { background-position: 20px 0; }
+}
+
+.feedback {
+    font-size: 1.2em;
+    margin: 10px 0;
+    padding: 15px;
+    border-radius: 10px;
+    display: none;
+    font-weight: bold;
+}
+
+.success { 
+    background: #e8f8f5; 
+    color: #2e7d32; 
+    border: 3px solid #78e08f;
+}
+
+.encourage { 
+    background: #fff9e7; 
+    color: #e55039; 
+    border: 3px solid #f6b93b;
+}
+
+.error {
+    background: #ffebee;
+    color: #c62828;
+    border: 3px solid #e55039;
+}
+
+.action-hint {
+    font-size: 0.9em;
+    color: #666;
+    margin-top: 8px;
+    font-style: italic;
+}
+
+/* Character animation for autism-friendly design */
+.character {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    font-size: 4em;
+    z-index: 100;
+    animation: float 3s ease-in-out infinite;
+}
+
+@keyframes float {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-10px); }
+}
+
+/* Responsive design */
+@media (max-width: 1200px) {
+    .container {
+        max-width: 95%;
+        padding: 20px;
+    }
+    
+    .actions-grid {
+        grid-template-columns: repeat(5, 1fr);
+        gap: 10px;
+    }
+    
+    .action-grid-item {
+        padding: 15px 10px;
+        min-height: 150px;
+    }
+}
+
+@media (max-width: 992px) {
+    .actions-grid {
+        grid-template-columns: repeat(3, 1fr);
+        gap: 10px;
+    }
+}
+
+@media (max-width: 768px) {
+    .container {
+        padding: 15px;
+        margin: 10px;
+    }
+    
+    h1 {
+        font-size: 2.2em;
+    }
+    
+    .action-instruction {
+        font-size: 1.4em;
+    }
+    
+    .actions-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 10px;
+    }
+    
+    .action-grid-item {
+        padding: 15px 10px;
+        min-height: 140px;
+    }
+    
+    .character {
+        font-size: 3em;
+        bottom: 10px;
+        right: 10px;
+    }
+}
+
+@media (max-width: 480px) {
+    .actions-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .action-emoji-large {
+        font-size: 4em;
+    }
+    
+    .action-grid-item {
+        min-height: 130px;
+    }
+    
+    .character {
+        font-size: 2.5em;
+    }
+}

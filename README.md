@@ -3,6 +3,7 @@
 An IoT-powered motion-interactive game designed to support children with autism by encouraging physical movement, gesture recognition, and real-time feedback through an engaging user interface.
 This project integrates embedded systems, machine learning, and web technologies into a seamless therapy-support tool.
 
+# Author: Afeef Ahmed
 # 🚀 Project Overview
 
 Children with autism often face challenges with physical engagement and social interaction. This project provides an interactive solution using motion-based gestures, allowing children to play simple games that respond to their movements in real time.
